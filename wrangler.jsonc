@@ -1,0 +1,42 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "loaner-management",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-05-14",
+
+  // Main address. The old workers.dev address is turned off: Access protects
+  // loaners.drivecaw.com only, so workers.dev would have no login in front of it.
+  "routes": [{ "pattern": "loaners.drivecaw.com", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false,
+
+  // Every request (pages included) passes through the Worker so the login is checked
+  // here as well as at the Cloudflare Access edge.
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "single-page-application"
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "loaner-management-db",
+      "database_id": "39d7fbdd-1f4e-461e-bb9b-d6fe7bd6de96",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "andrew-fda.cloudflareaccess.com",
+    // Audience (AUD) tag of the "Loaner cars" Access application. Fill in before deploying.
+    "ACCESS_AUD": "",
+    "ALLOWED_DOMAINS": "cawcaw.com,valleycarcredit.com",
+    // Client ID(s) of the Access service token(s) allowed to read /api/summary (comma-separated).
+    "SUMMARY_CLIENT_IDS": "",
+    "TZ": "America/New_York"
+  },
+
+  "observability": { "enabled": true }
+}
