@@ -31,7 +31,7 @@
   "vars": {
     "ACCESS_TEAM_DOMAIN": "andrew-fda.cloudflareaccess.com",
     // Audience (AUD) tag of the "Loaner cars" Access application. Fill in before deploying.
-    "ACCESS_AUD": "",
+    "ACCESS_AUD": "9a4180613a4748aaa98380e78ad4ece5c0a5e32b4e1f001ea41954e1ba34969c",
     "ALLOWED_DOMAINS": "cawcaw.com,valleycarcredit.com",
     // Client ID(s) of the Access service token(s) allowed to read /api/summary (comma-separated).
     "SUMMARY_CLIENT_IDS": "",
